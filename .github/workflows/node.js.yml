@@ -124,8 +124,7 @@ jobs:
           aws ec2 describe-instances \
           --filters "Name=tag:Name,Values=ops-server" \
           --query "Reservations[*].Instances[*].PublicIpAddress" \
-          --output text >> ./ansible/inventory.txt \
-          cat ./ansible/inventory.txt
+          --output text >> ./ansible/inventory.txt 
         shell: bash
 
       - name:
