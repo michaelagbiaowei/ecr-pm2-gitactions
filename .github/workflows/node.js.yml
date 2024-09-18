@@ -109,7 +109,7 @@ jobs:
       - name: Install Ansible
         run: |
           sudo apt update
-          sudo apt install -y ansible
+          sudo apt install ansible-core -y
           ansible --version  # Verify Ansible installation
 
       # Step 5: Ensure the Ansible inventory file exists
@@ -124,13 +124,14 @@ jobs:
           aws ec2 describe-instances \
           --filters "Name=tag:Name,Values=ops-server" \
           --query "Reservations[*].Instances[*].PublicIpAddress" \
-          --output text >> ./ansible/inventory.txt
+          --output text >> ./ansible/inventory.txt \
+          cat ./ansible/inventory.txt
         shell: bash
 
-      # Step 7: Run Ansible playbook (optional, if you have an Ansible playbook)
+      # #Step 7: Run Ansible playbook 
       # - name: Run Ansible Playbook
       #   run: |
-      #     ansible-playbook -i ./ansible/inventory.txt your-playbook.yml
+      #     ansible-playbook -i ./ansible/inventory.txt configure-server.yml
 
             
         
