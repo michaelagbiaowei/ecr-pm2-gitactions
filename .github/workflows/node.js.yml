@@ -115,7 +115,7 @@ jobs:
             ansible --version
             echo "Ansible is installed successful"
           else
-            ehco "Ansible is Installed"
+            echo "Ansible is Installed"
           fi
 
       # Step 5: Ensure the Ansible inventory file exists
