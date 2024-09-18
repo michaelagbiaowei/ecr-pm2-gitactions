@@ -127,6 +127,7 @@ jobs:
       # Step 6: Add server IP to Ansible inventory
       - name: Add server IP to Ansible inventory
         run: |
+          echo "[web]" > ./ansible/inventory.txt  # Add host group
           aws ec2 describe-instances \
           --filters "Name=tag:Name,Values=ops-server" \
           --query "Reservations[*].Instances[*].PublicIpAddress" \
