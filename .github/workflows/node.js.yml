@@ -108,9 +108,15 @@ jobs:
       # Step 4: Install Ansible
       - name: Install Ansible
         run: |
-          sudo apt update
-          sudo apt install ansible-core -y
-          ansible --version  # Verify Ansible installation
+          if ! command -v ansible &> /dev/null;
+          then
+            sudo apt update
+            sudo apt install ansible-core -y
+            ansible --version
+            echo "Ansible is installed successful"
+          else
+            ehco "Ansible is Installed"
+          fi
 
       # Step 5: Ensure the Ansible inventory file exists
       - name: Prepare Ansible inventory
@@ -127,13 +133,14 @@ jobs:
           --output text >> ./ansible/inventory.txt 
         shell: bash
 
-      - name:
+      # Debug Line
+      - name: Confirm Server IP
         run:  cat ./ansible/inventory.txt
 
-      # #Step 7: Run Ansible playbook 
-      # - name: Run Ansible Playbook
-      #   run: |
-      #     ansible-playbook -i ./ansible/inventory.txt configure-server.yml
+      #Step 7: Run Ansible playbook 
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i ./ansible/inventory.txt ./ansible/configure-server.yml
 
             
         
