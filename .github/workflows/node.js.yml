@@ -145,7 +145,7 @@ jobs:
       #Step 7: Run Ansible playbook 
       - name: Run Ansible Playbook
         run: |
-          ansible-playbook -i ./ansible/inventory.txt ./ansible/configure-server.yml
+          ansible-playbook -i ./ansible/inventory.txt ./ansible/deploy.yml
 
             
         

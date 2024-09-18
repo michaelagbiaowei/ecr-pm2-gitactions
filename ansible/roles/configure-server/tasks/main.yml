@@ -1,0 +1,10 @@
+---
+
+- name: Copy the bash script to the EC2 instance
+   template:
+    src: setup-ec2.sh.j2
+    dest: /tmp/setup-ec2.sh
+    mode: "0777"
+    
+- name: Run the bash script to configure the EC2 server
+  command: sh /tmp/setup-ec2.sh
