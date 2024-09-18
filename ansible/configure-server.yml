@@ -11,6 +11,7 @@
       copy:
         src: ./scripts/setup-ec2.sh
         dest: /tmp/setup-ec2.sh
+        remote_src: yes
         mode: '0755'
 
     - name: Run the bash script to configure the EC2 server
