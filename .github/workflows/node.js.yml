@@ -25,11 +25,8 @@ jobs:
     - run: export NODE_OPTIONS=--openssl-legacy-provider && npm run build --if-present
 
   push_to_registry:
-    name: Deploy
     runs-on: ubuntu-latest
-    environment: production
     needs: build
-        
 
     steps:
       - name: Checkout
@@ -62,7 +59,7 @@ jobs:
 
     steps:
       - name: Pull Docker Image From ECR
-        run: docker pull ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG
+        run: docker pull "${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG"
 
       - name: Scan Docker Image
         uses: aquasecurity/trivy-action@master
@@ -74,9 +71,7 @@ jobs:
           severity: "CRITICAL,HIGH"
 
   deploy_ec2:
-    name: Deploy
     runs-on: ubuntu-latest
-    environment: production
     needs: trivy
     steps:
       - name: Checkout
