@@ -11,7 +11,7 @@ RUN npm install
 FROM base AS build
 COPY --from=dependencies /usr/share/app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN export NODE_OPTIONS=--openssl-legacy-provider && npm run build --if-present
 
 # Final stage
 FROM nginx:alpine AS final
