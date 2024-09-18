@@ -105,6 +105,10 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
+      - name: Disable SSH Strict Host Key Checking
+        run: |
+          echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
       # Step 4: Install Ansible
       - name: Install Ansible
         run: |
