@@ -82,7 +82,7 @@ jobs:
   #         vuln-type: "os,library"
   #         severity: "CRITICAL,HIGH"
 
-  deploy_ec2:
+  deploy_to_ec2:
     runs-on: ubuntu-latest
     # needs: trivy
 
@@ -127,6 +127,9 @@ jobs:
           --output text >> ./ansible/inventory.txt \
           cat ./ansible/inventory.txt
         shell: bash
+
+      - name:
+        run:  cat ./ansible/inventory.txt
 
       # #Step 7: Run Ansible playbook 
       # - name: Run Ansible Playbook
