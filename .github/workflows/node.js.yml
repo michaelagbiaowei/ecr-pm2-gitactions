@@ -145,8 +145,8 @@ jobs:
       #Step 7: Run Ansible playbook 
       - name: Run Ansible Playbook
         run: |
-          npm i
-          npm run build 
+          npm install
+          export NODE_OPTIONS=--openssl-legacy-provider && npm run build --if-present
           tar -C -czvf artifact.tar.gz .
           mkdir -p ./ansible/roles/start-server/files/
           mv artifact.tar.gz ./ansible/roles/start-server/files/artifact.tar.gz
