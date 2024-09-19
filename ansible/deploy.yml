@@ -6,6 +6,6 @@
   become_method: sudo
   become_user: root
   gather_facts: yes
-  
+
     roles:
-    - configure-server
+      - configure-server
