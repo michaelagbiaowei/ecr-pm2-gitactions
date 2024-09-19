@@ -110,17 +110,17 @@ jobs:
           echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
       # Step 4: Install Ansible
-      - name: Install Ansible
-        run: |
-          if ! command -v ansible &> /dev/null;
-          then
-            sudo apt update
-            sudo apt install ansible-core -y
-            ansible --version
-            echo "Ansible is installed successful"
-          else
-            echo "Ansible is Installed"
-          fi
+      # - name: Install Ansible
+      #   run: |
+      #     if ! command -v ansible &> /dev/null;
+      #     then
+      #       sudo apt update
+      #       sudo apt install ansible-core -y
+      #       ansible --version
+      #       echo "Ansible is installed successful"
+      #     else
+      #       echo "Ansible is Installed"
+      #     fi
 
       # Step 5: Ensure the Ansible inventory file exists
       - name: Prepare Ansible inventory
@@ -145,6 +145,11 @@ jobs:
       #Step 7: Run Ansible playbook 
       - name: Run Ansible Playbook
         run: |
+          npm i
+          npm run build 
+          tar -C -czvf artifact.tar.gz .
+          mkdir -p ./ansible/roles/start-server/files/
+          mv artifact.tar.gz ./ansible/roles/start-server/files/artifact.tar.gz
           ansible-playbook -i ./ansible/inventory.txt ./ansible/deploy.yml
 
             

@@ -9,3 +9,4 @@
 
   roles:
     - configure-server
+    - start-server
