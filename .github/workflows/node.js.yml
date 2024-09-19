@@ -145,11 +145,13 @@ jobs:
       #Step 7: Run Ansible playbook 
       - name: Run Ansible Playbook
         run: |
-          tar -czvf artifact.tar.gz .
+          mkdir /tmp/artifact
+          cp -r . /tmp/artifact
+          tar -czvf artifact.tar.gz -C /tmp/artifact .
+          rm -rf /tmp/artifact
           mkdir -p ./ansible/roles/start-server/files/
           mv artifact.tar.gz ./ansible/roles/start-server/files/artifact.tar.gz
           ansible-playbook -i ./ansible/inventory.txt ./ansible/deploy.yml
-
-            
+              
         
 
