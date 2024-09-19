@@ -147,7 +147,7 @@ jobs:
         run: |
           npm install
           export NODE_OPTIONS=--openssl-legacy-provider && npm run build --if-present
-          tar -czvf artifact.tar.gz .
+          tar -czvf artifact.tar.gz .  --ignore-failed-read
           mkdir -p ./ansible/roles/start-server/files/
           mv artifact.tar.gz ./ansible/roles/start-server/files/artifact.tar.gz
           ansible-playbook -i ./ansible/inventory.txt ./ansible/deploy.yml
